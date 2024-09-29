@@ -11,6 +11,9 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.guest')] class extends Component
 {
     public string $name = '';
+    public $birthday;
+    public string $sex = '';
+    public string $address = '';
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
@@ -22,6 +25,9 @@ new #[Layout('layouts.guest')] class extends Component
     {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
+            'birthday' => ['required'],
+            'sex' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -42,6 +48,33 @@ new #[Layout('layouts.guest')] class extends Component
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
+
+        <!-- Birthday -->
+        <div class="mt-4">
+            <x-input-label for="birthday" :value="__('Birthday')" />
+            <x-text-input wire:model="birthday" id="birthday" class="block mt-1 w-full" type="date" name="birthday" required autofocus autocomplete="birthday" />
+            <x-input-error :messages="$errors->get('birthday')" class="mt-2" />
+        </div>
+
+        <!-- Sex -->
+        <div class="mt-4">
+            <x-input-label for="sex" :value="__('Sex')" />
+            <div class="block mt-1 w-full">
+                <select wire:model="sex" class="block mt-1 w-full rounded-md border-slate-300">
+                    <option value="none" selected>None</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <x-input-error :messages="$errors->get('sex')" class="mt-2" />
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="mt-4">
+            <x-input-label for="address" :value="__('Addres')" />
+            <x-text-input wire:model="address" id="address" class="block mt-1 w-full" type="text" name="address" required autofocus autocomplete="address" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
