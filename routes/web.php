@@ -19,3 +19,5 @@ Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
 Route::middleware(['auth', 'auth.session'])->group(function () {
    // Route::get('/user',[UserController::class,'user'])->name('user.user');
 });
+
+Route::view('/home', 'documate.home')->name('documate.home');
