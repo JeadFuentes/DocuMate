@@ -94,29 +94,53 @@
       <main class="d-flex flex-nowrap">
           <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary">
             <a href="/" class="d-block p-3 link-body-emphasis text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right">
-              <svg class="bi pe-none" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+              <img src="{{'/storage/images/Documate.jpg'}}" alt="Documate" width="40" height="40">
               <span class="visually-hidden">Icon-only</span>
             </a>
             <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
               <li class="nav-item">
-                <a href="{{route("documate.home")}}" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
-                  <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
-                </a>
+                @if ($title == 'HOME')
+                  <a href="{{route("documate.home")}}" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
+                  </a>
+                @else
+                  <a href="{{route("documate.home")}}" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
+                  </a>
+                @endif
               </li>
               <li>
-                <a href="{{route("documate.dashboard")}}" class="nav-link py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
-                  <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
-                </a>
+                @if ($title == 'DASHBOARD')
+                  <a href="{{route("documate.dashboard")}}" class="nav-link active py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
+                  </a>
+                @else
+                  <a href="{{route("documate.dashboard")}}" class="nav-link py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
+                  </a>
+                @endif
               </li>
               <li>
-                <a href="{{route("documate.orders")}}" class="nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
-                  <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
-                </a>
+                @if ($title == 'ORDERS')
+                  <a href="{{route("documate.orders")}}" class="active nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
+                  </a>
+                @else
+                  <a href="{{route("documate.orders")}}" class="nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
+                  </a>
+                @endif
               </li>
               <li>
-                <a href="{{route("documate.products")}}" class="nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
-                  <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
-                </a>
+                @if ($title == 'PRODUCTS')
+                  <a href="{{route("documate.products")}}" class="active nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
+                  </a>
+                @else
+                  <a href="{{route("documate.products")}}" class="nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
+                  </a>
+                @endif
               </li>
               <li>
                 <a href="#" class="nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
@@ -129,8 +153,8 @@
                 <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
               </a>
               <ul class="dropdown-menu text-small shadow">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">New Application...</a></li>
+                <!--<li><a class="dropdown-item" href="#">Settings</a></li>-->
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Sign out</a></li>
@@ -141,7 +165,7 @@
           {{$slot}}
       </main>
       
-      
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
           <script>
             (() => {
                 'use strict'
