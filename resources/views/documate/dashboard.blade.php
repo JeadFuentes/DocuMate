@@ -3,33 +3,60 @@
         DASHBOARD
     </x-slot>
     <section class=" mx-auto" style=" width:80%;">
-        <h3 class="mt-3">DocuMate | DASHBOARD</h3>
+        <h5 class="my-3">DocuMate | DASHBOARD</h3>
         <div class="content">
             <div class="row mt-4">
                 <div class="col-md-4">
-                    <div class="card text-white bg-primary mb-3">
-                        <div class="card-header">Total Applications</div>
-                        <div class="card-body">
-                            <h5 class="card-title">150</h5>
-                            <p class="card-text">Total applications processed.</p>
+                    <div class="card mb-3 h-100">
+                        <div class="card-header bg-primary text-white"><b>Total Applications</b></div>
+                        <div class="card-body bg-body-secondary">
+                            <div class="container">
+                                <div class="row">
+                                  <div class="col-sm pt-4">
+                                    <h2 class="card-title"><b>150</b></h5>
+                                    <p class="card-text">Total applications processed.</p>
+                                  </div>
+                                  <div class="col-sm text-center">
+                                    <h1 style="font-size: 8em"><i class="fa-solid fa-calculator"></i></h1>
+                                  </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card text-white bg-warning mb-3">
-                        <div class="card-header">Pending Applications</div>
-                        <div class="card-body">
-                            <h5 class="card-title">25</h5>
-                            <p class="card-text">Applications awaiting approval.</p>
+                    <div class="card mb-3 h-100">
+                        <div class="card-header text-white bg-warning"><b>Pending Applications</b></div>
+                        <div class="card-body bg-body-secondary">
+                            <div class="container">
+                                <div class="row">
+                                  <div class="col-sm pt-4">
+                                    <h2 class="card-title"><b>25</b></h5>
+                                    <p class="card-text">Applications awaiting approval.</p>
+                                  </div>
+                                  <div class="col-sm text-center">
+                                    <h1 style="font-size: 8em"><i class="fa-solid fa-clock-rotate-left"></i></i></h1>
+                                  </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card text-white bg-success mb-3">
-                        <div class="card-header">Completed Applications</div>
-                        <div class="card-body">
-                            <h5 class="card-title">125</h5>
-                            <p class="card-text">Successfully processed applications.</p>
+                    <div class="card mb- h-100">
+                        <div class="card-header text-white bg-success"><b>Completed Applications</b></div>
+                        <div class="card-body bg-body-secondary">
+                            <div class="container">
+                                <div class="row">
+                                  <div class="col-sm pt-4">
+                                    <h2 class="card-title"><b>125</b></h5>
+                                    <p class="card-text">Successfully processed applications.</p>
+                                  </div>
+                                  <div class="col-sm text-center">
+                                    <h1 style="font-size: 8em"><i class="fa-solid fa-clock-rotate-left"></i></i></h1>
+                                  </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

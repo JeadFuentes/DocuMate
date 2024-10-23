@@ -143,9 +143,15 @@
                 @endif
               </li>
               <li>
-                <a href="#" class="nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
-                  <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
-                </a>
+                @if ($title == 'USERS')
+                  <a href="{{route("documate.users")}}" class=" active nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
+                  </a>
+                @else
+                  <a href="{{route("documate.users")}}" class="nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
+                  </a>
+                @endif
               </li>
             </ul>
             <div class="dropdown border-top">

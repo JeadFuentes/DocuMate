@@ -24,3 +24,4 @@ Route::view('/home', 'documate.home')->name('documate.home');
 Route::view('/dashboard', 'documate.dashboard')->name('documate.dashboard');
 Route::view('/orders', 'documate.orders')->name('documate.orders');
 Route::view('/products', 'documate.products')->name('documate.products');
+Route::view('/users', 'documate.user')->name('documate.users');
