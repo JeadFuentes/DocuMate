@@ -14,6 +14,7 @@ new #[Layout('layouts.guest')] class extends Component
     public $birthday;
     public string $sex = '';
     public string $address = '';
+    public string $usertype = '';
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
@@ -28,6 +29,7 @@ new #[Layout('layouts.guest')] class extends Component
             'birthday' => ['required'],
             'sex' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
+            'usertype' => ['required', 'string', 'max:155'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -38,12 +40,12 @@ new #[Layout('layouts.guest')] class extends Component
 
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        $this->redirect(route('documate.home', absolute: false), navigate: true);
     }
 }; ?>
 
-<div>
-    <form wire:submit="register">
+<div class="my-5" style="overflow: scroll; height: 70vh">
+    <form wire:submit="register" class="px-5">
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -52,14 +54,14 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <!-- Birthday -->
-        <div class="mt-4">
+        <div class="mt-4 text-black">
             <x-input-label for="birthday" :value="__('Birthday')" />
             <x-text-input wire:model="birthday" id="birthday" class="block mt-1 w-full" type="date" name="birthday" required autofocus autocomplete="birthday" />
             <x-input-error :messages="$errors->get('birthday')" class="mt-2" />
         </div>
 
         <!-- Sex -->
-        <div class="mt-4">
+        <div class="mt-4 text-black">
             <x-input-label for="sex" :value="__('Sex')" />
             <div class="block mt-1 w-full">
                 <select wire:model="sex" class="block mt-1 w-full rounded-md border-slate-300">
@@ -72,21 +74,39 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <!-- Address -->
-        <div class="mt-4">
-            <x-input-label for="address" :value="__('Addres')" />
+        <div class="mt-4 text-black">
+            <x-input-label for="address" :value="__('Address')" />
             <x-text-input wire:model="address" id="address" class="block mt-1 w-full" type="text" name="address" required autofocus autocomplete="address" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-error :messages="$errors->get('address')" class="mt-2" />
+        </div>
+
+        <!-- Usertype -->
+        <div class="mt-4 text-black">
+            <x-input-label for="usertype" :value="__('User Type')" />
+            <div class="block mt-1 w-full">
+                <select wire:model="usertype" class="block mt-1 w-full rounded-md border-slate-300">
+                    <option value="none" selected>None</option>
+                    <option value="Customer">Customer</option>
+                    @if (Auth::user())
+                        @if (Auth::user()->usertype == "Administrator")
+                            <option value="Staff">Staff</option>
+                            <option value="Admistrator">Administrator</option>
+                        @endif
+                    @endif
+                </select>
+                <x-input-error :messages="$errors->get('usertype')" class="mt-2" />
+            </div>
         </div>
 
         <!-- Email Address -->
-        <div class="mt-4">
+        <div class="mt-4 text-black">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
+        <div class="mt-4 text-black">
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
@@ -98,7 +118,7 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <!-- Confirm Password -->
-        <div class="mt-4">
+        <div class="mt-4 text-black">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"

@@ -162,8 +162,11 @@
                 <li><a class="dropdown-item" href="#">New Application...</a></li>
                 <!--<li><a class="dropdown-item" href="#">Settings</a></li>-->
                 <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="{{route('user.logout')}}">Sign out</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                @if (Auth::user())
+                  <li><a class="dropdown-item" href="#">{{Auth::user()->usertype}} | {{Auth::user()->name}}</a></li>
+                @endif
               </ul>
             </div>
           </div>
@@ -180,6 +183,64 @@
                 new bootstrap.Tooltip(tooltipTriggerEl)
                 })
             })()
+
+            function toggleGenderSelection(radio) {
+              const genderSelection = document.getElementById('gender-selection');
+              const soleSelection = document.getElementById('sole-selection');
+              const soleSelectionLabel = document.getElementById('sole-selection-label');
+              const otherSelectionLabel = document.getElementById('other-selection-label');
+              const corporationSelection = document.getElementById('corporation-selection');
+              // Show gender selection only if Option 1 is selected
+              if (radio.value === 'soleproprietor' || radio.value === 'onepersoncorporation') {
+                  genderSelection.style.display = 'block'; // Show gender selection
+              } else {
+                  genderSelection.style.display = 'none'; // Hide gender selection
+              }
+
+              if (radio.value === 'corporation') {
+                  corporationSelection.style.display = 'block';
+                  soleSelection.style.display = 'none';
+              } else {
+                  corporationSelection.style.display = 'none';
+                  soleSelection.style.display = 'block';
+              }
+
+              if (radio.value === 'soleproprietor') {
+                  soleSelectionLabel.style.display = 'block'; 
+                  otherSelectionLabel.style.display = 'none'; 
+              } else {
+                  soleSelectionLabel.style.display = 'none'; 
+                  otherSelectionLabel.style.display = 'block'; ; 
+              }
+            }
+
+            function toggleAddress(checkbox) {
+              const sameAddress = document.getElementById('sameAddress');
+              
+              if (checkbox.checked) {
+                sameAddress.style.display = 'none'; // Hide 
+              } else {
+                sameAddress.style.display = 'block'; // show 
+              }
+            }
+
+            function toggleOwned(radio) {
+              const yesChecked = document.getElementById('yesChecked');
+              const noChecked = document.getElementById('noChecked');
+              
+              if (radio.value === 'yes') {
+                yesChecked.style.display = 'block'; 
+                noChecked.style.display = 'none';
+              } else {
+                yesChecked.style.display = 'none'; 
+                noChecked.style.display = 'block';
+              }
+            }
+
+            function toggleOthersInput(radio) {
+              const othersInput = document.getElementById('othersInput');
+              othersInput.style.display = radio.checked ? 'block' : 'none';
+          }
           </script>
     </body>
 </html>

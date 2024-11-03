@@ -13,18 +13,53 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <style>
+            body {
+                margin: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                text-align: center;
+                background-image: url('{{'/storage/images/bg-cover.jpg'}}'); /* Replace with your image URL */
+                background-size: cover;
+                background-position: center;
+                background-repeat:no-repeat;
+                position: relative;
+            }
+            .overlay {
+            background-color: rgba(245, 243, 243, 1); /* Dark overlay for readability */
+            padding: 50px;
+            padding-left: 120px;
+            padding-right: 120px;
+            border-radius: 10px;
+            position: relative;
+            z-index: 1;
+            }
+            .logo {
+                position: absolute;
+                top: 40px; /* Adjust the spacing from the top */
+                left: 50%;
+                transform: translateX(-50%);
+                max-width: 150px; /* Adjust logo size as needed */
+                z-index: 1;
+            }
+            h1 {
+                font-size: 3rem;
+            }
+            p {
+                font-size: 1.25rem;
+            }
+        </style>
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/" wire:navigate>
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+    <body>
+        <a href="/" wire:navigate>
+            <img src="{{'/storage/images/DocuMate-t.png'}}" alt="Your Logo" class="logo">
+        </a>
+        
+        <div class="overlay">
+            {{ $slot }}
         </div>
     </body>
 </html>

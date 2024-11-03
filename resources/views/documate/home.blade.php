@@ -9,7 +9,7 @@
             <div style="position: relative; z-index: 1;">
                 <h1>Streamlined Business Permit Processing</h1>
                 <p>Get your business permit quickly and easily, all online!</p>
-                <a href="#contact" class="btn btn-primary btn-lg py-4 px-3">Start Your Application</a>
+                <a href="{{route('documate.newapp')}}" class="btn btn-primary btn-lg py-4 px-3">Start Your Application</a>
             </div>
         </div>
         <div class="container mt-5" id="services">
