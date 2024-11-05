@@ -57,6 +57,20 @@ class Application extends Component
     public $capitalization = [0, 0, 0];
     public $grossSales = [0, 0, 0];
     public $declaration = false;
+    public $dti;
+    public $rhu;
+    public $bfp;
+    public $buildingpermit;
+    public $pnp;
+    public $zoningofficial;
+    public $menro;
+    public $treasureroffice;
+    public $marketsup;
+    public $mayoroffice;
+
+    public function save(){
+        dd($this->sameasmain);
+    }
 
     public function render()
     {

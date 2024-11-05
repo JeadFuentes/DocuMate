@@ -1,6 +1,6 @@
 <div>
     <div class="container mt-5">
-        <form wire:submit.prevent="submit">
+        <form wire:submit.prevent="save">
             <div class="mb-3">
                 <label class="form-label">Select an Option:</label>
                 
@@ -544,13 +544,95 @@
             </div>
             <hr>
             
+            <label class="form-label"><b>ATTACHMENTS</b></label><br>
+            <hr>
+
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="mb-3">
+                        <label for="dti" class="form-label">1. DTI</label>
+                        <input type="file" class="form-control" id="dti" wire:model="dti">
+                        @error("dti") <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="mb-3">
+                        <label for="rhu" class="form-label">2. RHU</label>
+                        <input type="file" class="form-control" id="rhu" wire:model="rhu">
+                        @error("rhu") <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="mb-3">
+                        <label for="bfp" class="form-label">3. BFP</label>
+                        <input type="file" class="form-control" id="bfp" wire:model="bfp">
+                        @error("bfp") <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="mb-3">
+                        <label for="buildingpermit" class="form-label">4. BUILDING OFFICIAL</label>
+                        <input type="file" class="form-control" id="buildingpermit" wire:model="buildingpermit">
+                        @error("buildingpermit") <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                      <div class="mb-3">
+                          <label for="pnp" class="form-label">5. PNP</label>
+                          <input type="file" class="form-control" id="pnp" wire:model="pnp">
+                          @error("pnp") <span class="text-danger">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="mb-3">
+                          <label for="zoningofficial" class="form-label">6. ZONING OFFICIAL</label>
+                          <input type="file" class="form-control" id="zoningofficial" wire:model="zoningofficial">
+                          @error("zoningofficial") <span class="text-danger">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="mb-3">
+                          <label for="menro" class="form-label">7. MENRO</label>
+                          <input type="file" class="form-control" id="menro" wire:model="menro">
+                          @error("menro") <span class="text-danger">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="mb-3">
+                          <label for="treasureroffice" class="form-label">8. TREASURERS OFFICE</label>
+                          <input type="file" class="form-control" id="treasureroffice" wire:model="treasureroffice">
+                          @error("treasureroffice") <span class="text-danger">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                      <div class="mb-3">
+                          <label for="marketsup" class="form-label">9. MARKET SUPERVISOR</label>
+                          <input type="file" class="form-control" id="marketsup" wire:model="marketsup">
+                          @error("marketsup") <span class="text-danger">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="mb-3">
+                          <label for="mayoroffice" class="form-label">10. MAYORS OFFICE</label>
+                          <input type="file" class="form-control" id="mayoroffice" wire:model="mayoroffice">
+                          @error("mayoroffice") <span class="text-danger">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            
             <div class="form-check mb-3">
                 <input type="checkbox" class="form-check-input" id="declaration" wire:model="declaration">
                 <label class="form-check-label" for="declaration">
                     I DECLARE UNDER PENALTY OF PERJURY that all information in this application is true and correct based on my personal knowledge and authentic records submitted to the Investment Services, Business Permits & License Division. Any false or misleading information supplied, or production of fake/falsified documents shall be grounds for appropriate legal action against me and automatically revokes permit. I hereby agree that all personal (as defined under the Data Privacy Law of 2012 and its implementing Rules and Regulation) and account transaction information or records with the Iloilo City Government may be processed, profiled or shared to requesting parties or for the purpose of any court, legal process, examination, inquiry and audit or investigation of any authority.
                 </label>
             </div>
-            
 
 
 
