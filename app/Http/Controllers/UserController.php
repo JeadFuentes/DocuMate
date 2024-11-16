@@ -16,4 +16,8 @@ class UserController extends Controller
 
         return redirect('/login');
     }
+
+    public function showChekout($id){
+        return view('documate.checkout', compact('id'));
+    }
 }

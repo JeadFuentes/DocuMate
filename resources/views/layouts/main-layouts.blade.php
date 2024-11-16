@@ -242,6 +242,18 @@
               const othersInput = document.getElementById('othersInput');
               othersInput.style.display = radio.checked ? 'block' : 'none';
           }
+
+          function togglePayFields(radio) {
+              const paymentMethod= document.getElementById('payField');
+              const paymentMethodGcash= document.getElementById('payFieldGcash');
+              if (radio.value === 'gcash') {
+                paymentMethod.style.display = 'none'; 
+                paymentMethodGcash.style.display = 'flex';
+              } else {
+                paymentMethod.style.display = 'flex'; 
+                paymentMethodGcash.style.display = 'none';
+              };
+          }
           </script>
     </body>
 </html>
