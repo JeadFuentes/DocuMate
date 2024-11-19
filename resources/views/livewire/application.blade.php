@@ -72,9 +72,9 @@
                         </div>
                     <button type="submit" name="submitBusinessInfo" class="btn btn-primary">Save</button>
                 </form>
-    
+                <hr>
                 <!--attachments-->
-                <h3 class="mt-5 pt-5">Add Attachments</h3>
+                <h3 class="mt-5">Add Attachments</h3>
                 <table class="table">
                     <thead>
                       <tr class="text-center">
@@ -115,7 +115,10 @@
                             </div>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>
+                <button wire:click="proceedToCheckout()" type="button" class="btn btn-primary mt-3">Proceed to Payment</button>
             </div>
+            <hr>
+            
     @else
     <form wire:submit.prevent="submit">
 
@@ -625,11 +628,5 @@
             </div>
         </div>
     </form>
-    @endif
-
-    @if (session()->has('message'))
-        <div class="alert alert-success mt-3">
-            {{ session('message') }}
-        </div>
     @endif
 </div>

@@ -212,6 +212,9 @@ class Application extends Component
         session()->flash('message', 'Application submitted successfully.');
     }
 
+    public function proceedToCheckout(){
+        return redirect()->route('documate.checkout', ['id' => $this->appCreated->id]);
+    }
     public function submitBusinessInfo()
     {
         $this->validate([
