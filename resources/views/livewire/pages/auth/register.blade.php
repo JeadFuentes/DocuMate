@@ -37,10 +37,14 @@ new #[Layout('layouts.guest')] class extends Component
         $validated['password'] = Hash::make($validated['password']);
 
         event(new Registered($user = User::create($validated)));
+        if (Auth::User()) {
+            $this->redirect(route('documate.users'));
+        }
+        else{
+            Auth::login($user);
 
-        Auth::login($user);
-
-        $this->redirect(route('documate.home', absolute: false), navigate: true);
+            $this->redirect(route('documate.home'));
+        }
     }
 }; ?>
 
@@ -86,12 +90,16 @@ new #[Layout('layouts.guest')] class extends Component
             <div class="block mt-1 w-full">
                 <select wire:model="usertype" class="block mt-1 w-full rounded-md border-slate-300">
                     <option value="none" selected>None</option>
-                    <option value="Customer">Customer</option>
                     @if (Auth::user())
                         @if (Auth::user()->usertype == "Administrator")
+                            <option value="Customer">Customer</option>
                             <option value="Staff">Staff</option>
                             <option value="Admistrator">Administrator</option>
+                        @else
+                            <option value="Customer">Customer</option>
                         @endif
+                     @else
+                        <option value="Customer">Customer</option>
                     @endif
                 </select>
                 <x-input-error :messages="$errors->get('usertype')" class="mt-2" />

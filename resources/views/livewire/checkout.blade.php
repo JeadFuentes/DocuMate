@@ -2,9 +2,9 @@
     <div class="container-sm px-5">
         
           <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-            <h2>Checkout form</h2>
-            <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+            <img class="d-block mx-auto mb-4" src="{{'/storage/images/DocuMate-t.png'}}" alt="" width="144" height="114">
+            <h2>Bussiness Permit <br> Checkout Form</h2>
+            <p class="lead">Thank you for your purchase! We appreciate your business</p>
           </div>
       
           <div class="row g-5">
@@ -175,6 +175,30 @@
             </form>
             </div>
           </div>
-        
+    </div>
+    <!--modal for receipt-->
+    <div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="receiptModalLabel">Receipt Preview</h1>
+            <a href="{{route("documate.dashboard")}}" class="btn-close"></a>
+          </div>
+          @if ($receiptUrl)
+              <!-- Display the PDF preview -->
+              <iframe src="{{ $receiptUrl }}" style="width: 100%; height: 600px;" frameborder="0"></iframe>
+
+              <!-- Provide a download link -->
+              <a href="{{ $receiptUrl }}" class="btn btn-primary" download="Receipt.pdf">Download PDF</a>
+          @endif
+        </div>
+      </div>
     </div>
 </div>
+@script
+<script>
+    $wire.$on('showReceiptModal', () => {
+      $('#receiptModal').modal('show');
+    });
+</script>
+@endscript

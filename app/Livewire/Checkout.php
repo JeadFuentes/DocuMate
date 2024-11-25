@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Checkouts;
 use App\Models\Applications;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Checkout extends Component
 {
@@ -26,6 +27,8 @@ class Checkout extends Component
     public $randomNumber;
     public $receivedData;
     public $id;
+
+    public $receiptUrl;
 
     public function mount($id)
     {
@@ -59,7 +62,7 @@ class Checkout extends Component
         ]);
 
         // Store in the database
-        Checkouts::create([
+        $receipt = Checkouts::create([
             'applications_id' => $this->id,
             'productname' => 'Bussiness Permit',
             'amount' => 1000,
@@ -79,13 +82,29 @@ class Checkout extends Component
             'invoiceno' => $this->randomNumber,
         ]);
 
+        $payment = Applications::find($this->id);
+
+        $status = [
+          'status' => 'For Proccessing'
+        ];
+
+        $payment->fill($status);
+
+        $payment->save();
+
+        $pdf = Pdf::loadView('documate.receiptPdf', ['pdfdata' => $receipt]);
+        $pdfFilePath = 'receipts/Receipt_' . uniqid() . '.pdf';
+        $pdf->save(storage_path('app/public/' . $pdfFilePath));
+        $this->receiptUrl = asset('storage/' . $pdfFilePath);
+
+        $this->dispatch('showReceiptModal');
         // Optionally reset form or redirect
-        session()->flash('message', 'information saved successfully!');
-        $this->reset();
-        return redirect('/newapp');
-        }
-        
+        //session()->flash('message', 'information saved successfully!');
+        //$this->reset();
+        //return redirect('/newapp');
+        } 
     }
+
     public function render()
     {
         return view('livewire.checkout');

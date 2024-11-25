@@ -23,12 +23,12 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-3 h-100">
-                        <div class="card-header text-white bg-warning"><b>Pending Applications</b></div>
+                        <div class="card-header text-white bg-warning"><b>Pending for Proccessing</b></div>
                         <div class="card-body bg-body-secondary">
                             <div class="container">
                                 <div class="row">
                                   <div class="col-sm pt-4">
-                                    <h2 class="card-title"><b>25</b></h2>
+                                    <h2 class="card-title"><b>{{$this->pendingApp}}</b></h2>
                                     <p class="card-text">Applications awaiting approval.</p>
                                   </div>
                                   <div class="col-sm text-center">
@@ -41,13 +41,13 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb- h-100">
-                        <div class="card-header text-white bg-success"><b>Completed Applications</b></div>
+                        <div class="card-header text-white bg-success"><b>For Payment Applications</b></div>
                         <div class="card-body bg-body-secondary">
                             <div class="container">
                                 <div class="row">
                                   <div class="col-sm pt-4">
-                                    <h2 class="card-title"><b>125</b></h5>
-                                    <p class="card-text">Successfully processed applications.</p>
+                                    <h2 class="card-title"><b>{{$this->paymentApp}}</b></h5>
+                                    <p class="card-text">Successfully processed but not Payed applications.</p>
                                   </div>
                                   <div class="col-sm text-center">
                                     <h1 style="font-size: 8em"><i class="fa-solid fa-clock-rotate-left"></i></i></h1>
@@ -62,52 +62,33 @@
             <h4 class="mt-5">Pending Applications</h4>
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>Type of Application</th>
+                        <th>Type of Bussiness</th>
+                        <th>Trade Name</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>john@example.com</td>
-                        <td>Pending</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jane Smith</td>
-                        <td>jane@example.com</td>
-                        <td>Pending</td>
-                    </tr>
-                </tbody>
-            </table>
-    
-            <h4 class="mt-5">Completed Applications</h4>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Alice Brown</td>
-                        <td>alice@example.com</td>
-                        <td>Completed</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Bob White</td>
-                        <td>bob@example.com</td>
-                        <td>Completed</td>
-                    </tr>
+                    @if ($this->pendingApplication)
+                        @foreach ($this->pendingApplication as $pendingApp)
+                            <tr class="text-center">
+                                <td>{{$pendingApp->id}}</td>
+                                <td>{{$pendingApp->typeofapplication}}</td>
+                                <td>{{$pendingApp->typeofbussiness}}</td>
+                                <td>{{$pendingApp->tradename}}</td>
+                                <td>{{$pendingApp->status}}</td>
+                                <td>
+                                    @if ($pendingApp->status == 'For Payment')
+                                        <button wire:click="payApplication({{$pendingApp->id}})" type="button" class="btn btn-success btn-sm">Pay Now</button>
+                                    @endif
+                                    <button wire:click="deleteApplication({{$pendingApp->id}})" type="button" class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

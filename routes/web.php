@@ -28,3 +28,4 @@ Route::view('/products', 'documate.products')->name('documate.products');
 Route::view('/users', 'documate.user')->name('documate.users');
 Route::view('/newapp', 'documate.newapp')->name('documate.newapp');
 Route::get('/newapp/checkout/{id}', [UserController::class, 'showChekout'])->name('documate.checkout');
+Route::get('/printform', [UserController::class, 'printForm'])->name('documate.printForm');

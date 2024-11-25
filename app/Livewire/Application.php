@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\BusinessInformation;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class Application extends Component
 {
@@ -156,6 +157,7 @@ class Application extends Component
 
         
        $this->appCreated = Applications::create([
+            'user_id' => Auth::user()->id,
             'typeofapplication' => $this->typeofapplication,
             'typeofbussiness' => $this->typeofbussiness,
             'gender' => $this->gender,

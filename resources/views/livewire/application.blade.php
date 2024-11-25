@@ -33,7 +33,7 @@
                             @endforeach
                            @endif
                     </tbody>
-                  </table>
+                </table>
                 <form wire:submit.prevent="submitBusinessInfo">
                         <div class="row mb-3">
                             <div class="col"><p class="form-label">Line of Business</p></div>

@@ -27,7 +27,7 @@
                           </div>
                         </div>
                       </div>
-                    <button class="btn btn-primary my-2 fs-4 py-4 px-4" onclick="contactUs()">Get Started</button>
+                    <a href="{{route('documate.newapp')}}"><button class="btn btn-primary my-2 fs-4 py-4 px-4" >Get Started</button></a>
                 </div>
             </div>
         

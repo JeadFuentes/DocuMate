@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             // General Information
+            $table->integer('user_id');
             $table->string('typeofapplication')->nullable();
             $table->string('typeofbussiness')->nullable();
             $table->enum('gender', ['male', 'female', 'other'])->nullable();
