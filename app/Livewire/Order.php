@@ -66,8 +66,7 @@ class Order extends Component
 
     public function receipt($id)
     {
-        $receipt = Checkouts::find($id);
-        dd($id);
+        $receipt = Checkouts::where('applications_id',$id)->first();
         $pdf = Pdf::loadView('documate.receiptPdf', ['pdfdata' => $receipt]);
         $pdfFilePath = 'receipts/Receipt_' . uniqid() . '.pdf';
         $pdf->save(storage_path('app/public/' . $pdfFilePath));
