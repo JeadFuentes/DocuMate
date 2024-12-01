@@ -9,6 +9,7 @@ use App\Models\Checkouts;
 use Illuminate\Support\Facades\Storage;
 use App\Models\BusinessInformation;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class Order extends Component
 {
@@ -17,10 +18,42 @@ class Order extends Component
     public $attachment;
     public $pdfUrl;
     public $receiptUrl;
+    public $status;
 
+    protected $listeners = ['reload' => 'mount'];
     public function mount(){
         $this->Applications = Applications::get();
         //$this->Applications = Applications::where('status','For Proccessing')->orwhere('status','For Payment')->get();
+        if(Auth::user()->usertype == 'Administrator' || Auth::user()->usertype == 'Staff'){
+            if($this->status == 'All'){
+                $this->Applications = Applications::get();
+            } else if($this->status == 'forPayment'){
+                $this->Applications = Applications::where('status','For Payment')->get();
+            } else if($this->status == 'forProccessing'){
+                $this->Applications = Applications::where('status','For Proccessing')->get();
+            } else if($this->status == 'Approved'){
+                $this->Applications = Applications::where('status','Approved')->get();
+            }else if($this->status == 'Rejected'){
+                $this->Applications = Applications::where('status','Rejected')->get();
+            }
+            
+        }else{
+            if($this->status == 'All'){
+                $this->Applications = Applications::where('user_id',Auth::user()->id)->get();
+            } else if($this->status == 'forPayment'){
+                $this->Applications = Applications::where('status','For Payment')->where('user_id',Auth::user()->id)->get();
+            } else if($this->status == 'forProccessing'){
+                $this->Applications = Applications::where('status','For Proccessing')->where('user_id',Auth::user()->id)->get();
+            } else if($this->status == 'Approved'){
+                $this->Applications = Applications::where('status','Approved')->where('user_id',Auth::user()->id)->get();
+            }else if($this->status == 'Rejected'){
+                $this->Applications = Applications::where('status','Rejected')->where('user_id',Auth::user()->id)->get();
+            }
+        }
+    }
+
+    public function stats(){
+        $this->dispatch('reload');
     }
 
     public function line($id)

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Applications;
+use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Component
 {
@@ -17,7 +18,12 @@ class Dashboard extends Component
         $this->pendingApp = Applications::where('status','For Proccessing')->count();
         $this->paymentApp = Applications::where('status','For Payment')->count();
 
-        $this->pendingApplication = Applications::where('status','For Proccessing')->orwhere('status','For Payment')->get();
+        if(Auth::user()->usertype == 'Administrator' || Auth::user()->usertype == 'Staff'){
+            $this->pendingApplication = Applications::get();
+        }else{
+            $this->pendingApplication = Applications::where('user_id',Auth::user()->id)->get();
+        }
+
     }
 
     public function payApplication($id){

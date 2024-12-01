@@ -51,7 +51,7 @@ new #[Layout('layouts.guest')] class extends Component
 <div class="my-5" style="overflow: scroll; height: 70vh">
     <form wire:submit="register" class="px-5">
         <!-- Name -->
-        <div>
+        <div class="text-black">
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />

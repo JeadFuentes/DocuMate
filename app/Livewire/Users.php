@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
 
@@ -88,7 +89,12 @@ class Users extends Component
 
     public function render()
     {
-        $this->userList = User::get();
+        if(Auth::user()->usertype == 'Administrator' || Auth::user()->usertype == 'Staff'){
+            $this->userList = User::get();
+        }else{
+            $this->userList = User::where('id',Auth::user()->id)->get();
+        }
+        
         return view('livewire.users');
     }
 }

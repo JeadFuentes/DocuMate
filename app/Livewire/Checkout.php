@@ -42,7 +42,10 @@ class Checkout extends Component
         if($this->paymentMethod == 'gcash'){
             $this->nameOnCard = $this->nameGcash;
             $this->acctnumber = $this->gcashNumber;
+            $this->expiration = 'NA';
+            $this->cvvSecurity = 'NA';
         }
+        
 
         if($this->acctnumber){
             // Validate inputs

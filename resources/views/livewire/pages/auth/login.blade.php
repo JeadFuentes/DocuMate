@@ -20,7 +20,12 @@ new #[Layout('layouts.guest')] class extends Component
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('documate.home'));
+        if (Auth::user()->usertype == "Staff") {
+            $this->redirectIntended(default: route('documate.dashboard'));
+        } else {
+            $this->redirectIntended(default: route('documate.home'));
+        }
+
     }
 }; ?>
 

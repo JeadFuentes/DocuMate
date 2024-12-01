@@ -1,14 +1,15 @@
 <div class="content">
-    <!-- Search Bar -->
+    <!-- Search Bar 
     <div class="mt-4">
         <input type="text" id="searchInput" class="form-control" placeholder="Search by name or email" onkeyup="searchOrders()">
-    </div>
+    </div>-->
 
     <!-- Status Filter -->
     <div class="mt-4">
-        <select id="statusFilter" class="form-control" onchange="filterByStatus()">
-            <option value="">All Statuses</option>
-            <option value="Pending">Pending</option>
+        <select wire:model="status" wire:change='stats' id="statusFilter" class="form-control" onchange="filterByStatus()">
+            <option value="All">All Statuses</option>
+            <option value="forPayment">For Payment</option>
+            <option value="forProccessing">For Proccessing</option>
             <option value="Approved">Approved</option>
             <option value="Rejected">Rejected</option>
         </select>

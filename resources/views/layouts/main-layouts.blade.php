@@ -98,70 +98,176 @@
               <span class="visually-hidden">Icon-only</span>
             </a>
             <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-              <li class="nav-item">
-                @if ($title == 'HOME')
-                  <a href="{{route("documate.home")}}" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
-                  </a>
-                @else
-                  <a href="{{route("documate.home")}}" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
-                  </a>
-                @endif
-              </li>
-              <li>
-                @if ($title == 'DASHBOARD')
-                  <a href="{{route("documate.dashboard")}}" class="nav-link active py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
-                  </a>
-                @else
-                  <a href="{{route("documate.dashboard")}}" class="nav-link py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
-                  </a>
-                @endif
-              </li>
-              <li>
-                @if ($title == 'ORDERS')
-                  <a href="{{route("documate.orders")}}" class="active nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
-                  </a>
-                @else
-                  <a href="{{route("documate.orders")}}" class="nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
-                  </a>
-                @endif
-              </li>
-              <li>
-                @if ($title == 'PRODUCTS')
-                  <a href="{{route("documate.products")}}" class="active nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
-                  </a>
-                @else
-                  <a href="{{route("documate.products")}}" class="nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
-                  </a>
-                @endif
-              </li>
-              <li>
-                @if ($title == 'USERS')
-                  <a href="{{route("documate.users")}}" class=" active nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
-                  </a>
-                @else
-                  <a href="{{route("documate.users")}}" class="nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
-                    <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
-                  </a>
-                @endif
-              </li>
+              @if (Auth::user()->usertype == "Administrator")
+                <li class="nav-item">
+                  @if ($title == 'HOME')
+                    <a href="{{route("documate.home")}}" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.home")}}" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'DASHBOARD')
+                    <a href="{{route("documate.dashboard")}}" class="nav-link active py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.dashboard")}}" class="nav-link py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'ORDERS')
+                    <a href="{{route("documate.orders")}}" class="active nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.orders")}}" class="nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'PRODUCTS')
+                    <a href="{{route("documate.products")}}" class="active nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.products")}}" class="nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'USERS')
+                    <a href="{{route("documate.users")}}" class=" active nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.users")}}" class="nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
+                    </a>
+                  @endif
+                </li>
+              @elseif (Auth::user()->usertype == "Staff")
+                <li>
+                  @if ($title == 'DASHBOARD')
+                    <a href="{{route("documate.dashboard")}}" class="nav-link active py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.dashboard")}}" class="nav-link py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'ORDERS')
+                    <a href="{{route("documate.orders")}}" class="active nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.orders")}}" class="nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'PRODUCTS')
+                    <a href="{{route("documate.products")}}" class="active nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.products")}}" class="nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'USERS')
+                    <a href="{{route("documate.users")}}" class=" active nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.users")}}" class="nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
+                    </a>
+                  @endif
+                </li>
+              <!--Customer-->
+              @else
+                <li class="nav-item">
+                  @if ($title == 'HOME')
+                    <a href="{{route("documate.home")}}" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.home")}}" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'DASHBOARD')
+                    <a href="{{route("documate.dashboard")}}" class="nav-link active py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.dashboard")}}" class="nav-link py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'ORDERS')
+                    <a href="{{route("documate.orders")}}" class="active nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.orders")}}" class="nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'PRODUCTS')
+                    <a href="{{route("documate.products")}}" class="active nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.products")}}" class="nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
+                    </a>
+                  @endif
+                </li>
+                <li>
+                  @if ($title == 'USERS')
+                    <a href="{{route("documate.users")}}" class=" active nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
+                    </a>
+                  @else
+                    <a href="{{route("documate.users")}}" class="nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
+                    </a>
+                  @endif
+                </li>
+              @endif
             </ul>
             <div class="dropdown border-top">
               <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
               </a>
               <ul class="dropdown-menu text-small shadow">
-                <li><a class="dropdown-item" href="#">New Application...</a></li>
+                @if (Auth::user()->usertype == "Customer")
+                  <li><a class="dropdown-item" href="{{route('documate.newapp')}}">New Application...</a></li>
+                @endif
                 <!--<li><a class="dropdown-item" href="#">Settings</a></li>-->
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="{{route("documate.users")}}">Profile</a></li>
                 <li><a class="dropdown-item" href="{{route('user.logout')}}">Sign out</a></li>
                 <li><hr class="dropdown-divider"></li>
                 @if (Auth::user())
