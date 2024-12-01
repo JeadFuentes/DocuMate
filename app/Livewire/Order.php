@@ -10,46 +10,26 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\BusinessInformation;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class Order extends Component
 {
+    use WithPagination;
     public $businessInformation;
-    public $Applications;
     public $attachment;
     public $pdfUrl;
     public $receiptUrl;
-    public $status;
+    public $status = 'All';
+    public $attchId;
+
+    public $sortBy = 'id';
+    public $sortDirection = 'desc';
+    public $perPage = 5;
+    public $search = '';
 
     protected $listeners = ['reload' => 'mount'];
     public function mount(){
-        $this->Applications = Applications::get();
         //$this->Applications = Applications::where('status','For Proccessing')->orwhere('status','For Payment')->get();
-        if(Auth::user()->usertype == 'Administrator' || Auth::user()->usertype == 'Staff'){
-            if($this->status == 'All'){
-                $this->Applications = Applications::get();
-            } else if($this->status == 'forPayment'){
-                $this->Applications = Applications::where('status','For Payment')->get();
-            } else if($this->status == 'forProccessing'){
-                $this->Applications = Applications::where('status','For Proccessing')->get();
-            } else if($this->status == 'Approved'){
-                $this->Applications = Applications::where('status','Approved')->get();
-            }else if($this->status == 'Rejected'){
-                $this->Applications = Applications::where('status','Rejected')->get();
-            }
-            
-        }else{
-            if($this->status == 'All'){
-                $this->Applications = Applications::where('user_id',Auth::user()->id)->get();
-            } else if($this->status == 'forPayment'){
-                $this->Applications = Applications::where('status','For Payment')->where('user_id',Auth::user()->id)->get();
-            } else if($this->status == 'forProccessing'){
-                $this->Applications = Applications::where('status','For Proccessing')->where('user_id',Auth::user()->id)->get();
-            } else if($this->status == 'Approved'){
-                $this->Applications = Applications::where('status','Approved')->where('user_id',Auth::user()->id)->get();
-            }else if($this->status == 'Rejected'){
-                $this->Applications = Applications::where('status','Rejected')->where('user_id',Auth::user()->id)->get();
-            }
-        }
     }
 
     public function stats(){
@@ -64,8 +44,13 @@ class Order extends Component
 
     public function attach($id)
     {
+        $this->attchId = $id;
         $this->attachment = Attachment::where('application_id',$id)->get();
         $this->dispatch('showAttachmentModal');
+    }
+
+    public function proceedToAttachment(){
+        return redirect()->route('documate.attachment', ['id' => $this->attchId]);
     }
 
     public function form($id)
@@ -112,8 +97,43 @@ class Order extends Component
         $approve->save();
     }
 
+    public function perPages(){
+        //
+    }
+
+    public function updatingSearch(){
+        $this->resetPage();
+    }
+
+    public function sortingBy($field){
+        if ($this->sortDirection == 'asc'){
+            $this->sortDirection = 'desc';
+        }
+        else{
+            $this->sortDirection = 'asc';
+        }
+        
+        return $this->sortBy = $field;
+    }
+
     public function render()
     {
-        return view('livewire.order');
+        if(Auth::user()->usertype == 'Administrator' || Auth::user()->usertype == 'Staff'){
+            $Applications = Applications::search($this->search)->orderBy($this->sortBy, $this->sortDirection)->paginate($this->perPage);
+            if($this->status == 'All'){
+                $Applications = Applications::search($this->search)->orderBy($this->sortBy, $this->sortDirection)->paginate($this->perPage);
+            } else {
+                $Applications = Applications::search($this->search)->orderBy($this->sortBy, $this->sortDirection)->where('status',$this->status)->paginate($this->perPage);
+            } 
+            
+        }else{
+            $Applications = Applications::search($this->search)->orderBy($this->sortBy, $this->sortDirection)->where('user_id',Auth::user()->id)->paginate($this->perPage);
+            if($this->status == 'All'){
+                $Applications = Applications::search($this->search)->orderBy($this->sortBy, $this->sortDirection)->where('user_id',Auth::user()->id)->paginate($this->perPage);
+            } else{
+                $Applications = Applications::search($this->search)->orderBy($this->sortBy, $this->sortDirection)->where('status',$this->status)->where('user_id',Auth::user()->id)->paginate($this->perPage);
+            }
+        }
+        return view('livewire.order', ['Applications' => $Applications]);
     }
 }

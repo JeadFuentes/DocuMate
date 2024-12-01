@@ -10,10 +10,11 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class Users extends Component
 {
-    public $userlist;
+    use WithPagination;
     public $users;
 
     public string $name = '';
@@ -25,6 +26,11 @@ class Users extends Component
     public $id = '';
     public string $password = '';
     public string $password_confirmation = '';
+
+    public $sortBy = 'id';
+    public $sortDirection = 'desc';
+    public $perPage = 5;
+    public $search = '';
     
     public function addNew(){
         return redirect("/register");
@@ -87,14 +93,29 @@ class Users extends Component
         $this->redirect(route('documate.users'));
     }
 
-    public function render()
-    {
-        if(Auth::user()->usertype == 'Administrator' || Auth::user()->usertype == 'Staff'){
-            $this->userList = User::get();
-        }else{
-            $this->userList = User::where('id',Auth::user()->id)->get();
+    public function perPages(){
+        //
+    }
+
+    public function sortingBy($field){
+        if ($this->sortDirection == 'asc'){
+            $this->sortDirection = 'desc';
+        }
+        else{
+            $this->sortDirection = 'asc';
         }
         
-        return view('livewire.users');
+        return $this->sortBy = $field;
+    }
+
+    public function render()
+    {
+        if(Auth::user()->usertype == 'Administrator'){
+            $userList = User::search($this->search)->orderBy($this->sortBy, $this->sortDirection)->paginate($this->perPage);
+        }else{
+            $userList = User::search($this->search)->orderBy($this->sortBy, $this->sortDirection)->where('id',Auth::user()->id)->paginate($this->perPage);
+        }
+        
+        return view('livewire.users', ['userLists' => $userList]);
     }
 }

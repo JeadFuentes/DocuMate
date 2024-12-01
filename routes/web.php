@@ -25,5 +25,6 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::view('/users', 'documate.user')->name('documate.users');
     Route::view('/newapp', 'documate.newapp')->name('documate.newapp');
     Route::get('/newapp/checkout/{id}', [UserController::class, 'showChekout'])->name('documate.checkout');
+    Route::get('/newapp/attch/{id}', [UserController::class, 'showAttachment'])->name('documate.attachment');
     Route::get('/printform', [UserController::class, 'printForm'])->name('documate.printForm');
 });

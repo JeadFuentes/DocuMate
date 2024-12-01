@@ -46,4 +46,14 @@ class Applications extends Model
         'status',
         'remarks'
     ];
+
+    public function scopeSearch($query, $val){
+        return $query->where(function($q) use ($val) {
+            $q->where('id', 'like', '%'.$val.'%')
+              ->orWhere('typeofapplication', 'like', '%'.$val.'%')
+              ->orWhere('typeofbussiness', 'like', '%'.$val.'%')
+              ->orWhere('tradename', 'like', '%'.$val.'%')
+              ->orWhere('status', 'like', '%'.$val.'%');
+        });
+    }
 }

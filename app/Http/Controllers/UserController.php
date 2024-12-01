@@ -20,4 +20,8 @@ class UserController extends Controller
     public function showChekout($id){
         return view('documate.checkout', compact('id'));
     }
+
+    public function showAttachment($id){
+        return view('documate.attachment', compact('id'));
+    }
 }

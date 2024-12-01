@@ -59,21 +59,27 @@
                 </div>
             </div>
     
-            <h4 class="mt-5">Pending Applications</h4>
+            <h4 class="mt-5">Applications</h4>
             <table class="table">
+                <input id="searchTxt" class="form-control mb-3" type="text" placeholder="search">
                 <thead>
                     <tr class="text-center">
-                        <th>#</th>
-                        <th>Type of Application</th>
-                        <th>Type of Bussiness</th>
-                        <th>Trade Name</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th style="cursor: pointer" wire:click="sortingBy('id')">ID &ensp; @include('partials.sort-icon',['field'=>'id'])</th>
+                        <th style="cursor: pointer" wire:click="sortingBy('typeofapplication')">Type of Application &ensp; @include('partials.sort-icon',['field'=>'typeofapplication'])</th>
+                        <th style="cursor: pointer" wire:click="sortingBy('typeofbussiness')">Type of Bussiness &ensp; @include('partials.sort-icon',['field'=>'typeofbussiness'])</th>
+                        <th style="cursor: pointer" wire:click="sortingBy('tradename')">Trade Name &ensp; @include('partials.sort-icon',['field'=>'tradename'])</th>
+                        <th style="cursor: pointer" wire:click="sortingBy('status')">Status &ensp; @include('partials.sort-icon',['field'=>'status'])</th>
+                        <th>
+                            @if (Auth::user()->usertype == 'Staff')
+                            @else
+                                Action
+                            @endif
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($this->pendingApplication)
-                        @foreach ($this->pendingApplication as $pendingApp)
+                    @if ($pendingApplication)
+                        @foreach ($pendingApplication as $pendingApp)
                             <tr class="text-center">
                                 <td>{{$pendingApp->id}}</td>
                                 <td>{{$pendingApp->typeofapplication}}</td>
@@ -81,16 +87,45 @@
                                 <td>{{$pendingApp->tradename}}</td>
                                 <td>{{$pendingApp->status}}</td>
                                 <td>
-                                    @if ($pendingApp->status == 'For Payment')
-                                        <button wire:click="payApplication({{$pendingApp->id}})" type="button" class="btn btn-success btn-sm">Pay Now</button>
+                                    @if (Auth::user()->usertype == 'Staff')
+                                    @else
+                                        @if ($pendingApp->status == 'For Payment')
+                                            <button wire:click="payApplication({{$pendingApp->id}})" type="button" class="btn btn-success btn-sm">Pay Now</button>
+                                        @endif
+                                        <button wire:click="deleteApplication({{$pendingApp->id}})" type="button" class="btn btn-danger btn-sm">Delete</button>
                                     @endif
-                                    <button wire:click="deleteApplication({{$pendingApp->id}})" type="button" class="btn btn-danger btn-sm">Delete</button>
                                 </td>
                             </tr>
                         @endforeach
                     @endif
                 </tbody>
             </table>
+            <div class="row mt-2 mb-2">
+                <div class="col">
+                    <p class="d-inline px-3 text" style="font-size: 15px;">Per Page:</p>
+                    <select wire:model="perPage" wire:change='perPages()' class="rounded d-inline px-3 w-8">
+                        <option>2</option>
+                        <option>5</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
+                        <option>25</option>
+                    </select>
+                </div>
+                <div class="col">
+                    {{$pendingApplication->links()}}
+                </div>
+            </div>
         </div>
     </section>
 </div>
+@script
+<script>
+    $(document).ready(function(){
+      $('#searchTxt').on('keyup',function(){
+        @this.search = $(this).val();
+        @this.call('perPages');
+      })
+    });
+</script>
+@endscript

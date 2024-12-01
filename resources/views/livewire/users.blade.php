@@ -5,24 +5,24 @@
             <button type="button" class="btn btn-primary w-50" wire:click="addNew">New user</button>
           </div>
           <div class="col-sm">
-            <!--<input id="searchTxt" class="form-control" type="text" placeholder="search">-->
+            <input id="searchTxt" class="form-control mb-3" type="text" placeholder="search">
           </div>
         </div>
     </div>
     <table class="ml-3 table table-striped table-hover" style="width: 100%">
       <thead class="text-center">
         <tr>
-          <th style="cursor: pointer" wire:click="sortingBy('id')" scope="col">#</th>
-          <th style="cursor: pointer" wire:click="sortingBy('name')" scope="col">Name</th>
-          <th style="cursor: pointer" wire:click="sortingBy('address')" scope="col">Address</th>
-          <th style="cursor: pointer" wire:click="sortingBy('usertype')" scope="col">Usertype</th>
-          <th style="cursor: pointer" wire:click="sortingBy('email')" scope="col">Username</th>
+          <th style="cursor: pointer" wire:click="sortingBy('id')" scope="col">ID &ensp; @include('partials.sort-icon',['field'=>'id'])</th>
+          <th style="cursor: pointer" wire:click="sortingBy('name')" scope="col">Name &ensp; @include('partials.sort-icon',['field'=>'name'])</th>
+          <th style="cursor: pointer" wire:click="sortingBy('address')" scope="col">Address &ensp; @include('partials.sort-icon',['field'=>'address'])</th>
+          <th style="cursor: pointer" wire:click="sortingBy('usertype')" scope="col">Usertype &ensp; @include('partials.sort-icon',['field'=>'usertype'])</th>
+          <th style="cursor: pointer" wire:click="sortingBy('email')" scope="col">Username &ensp; @include('partials.sort-icon',['field'=>'email'])</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody class="table-group-divider text-center">
           @if (Auth::user()->usertype == 'Administrator')
-              @foreach ($this->userList as $user)
+              @foreach ($userLists as $user)
               <tr>
                   <th scope="row">{{$user['id']}}</th>
                   <td>{{$user['name']}}</td>
@@ -37,7 +37,7 @@
               </tr>
               @endforeach
           @else
-              @foreach ($this->userList as $user)
+              @foreach ($userLists as $user)
                   @if (Auth::user()->id == $user['id'])
                   <tr>
                       <th scope="row">{{$user['id']}}</th>
@@ -56,6 +56,22 @@
           @endif
       </tbody>
     </table>
+    <div class="row mt-2 mb-2">
+        <div class="col">
+            <p class="d-inline px-3 text" style="font-size: 15px;">Per Page:</p>
+            <select wire:model="perPage" wire:change='perPages()' class="rounded d-inline px-3 w-8">
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+                <option>25</option>
+            </select>
+        </div>
+        <div class="col">
+            {{$userLists->links()}}
+        </div>
+    </div>
     <!--modals-->  
   <!--edit modal-->
   <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -181,7 +197,7 @@
     $(document).ready(function(){
       $('#searchTxt').on('keyup',function(){
         @this.search = $(this).val();
-        @this.call('with');
+        @this.call('perPages');
       })
     });
     $wire.on('showEditModal', () => {
